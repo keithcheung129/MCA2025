@@ -10,82 +10,108 @@
             --dark-bg: #121212; --card-bg: #1e1e1e; --text-color: #f0f0f0;
         }
 
-        /* --- INTRO PAGE STYLES --- */
+        body { font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; background-color: var(--dark-bg); color: var(--text-color); margin: 0; line-height: 1.6; }
+
+        /* --- INTRO PAGE --- */
         #intro-page {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/intro-bg.jpg'); /* Add an intro bg image here */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            transition: opacity 1s ease-out, visibility 1s;
-            text-align: center;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('images/intro-bg.jpg');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 2000; transition: opacity 1s ease-out, visibility 1s; padding: 20px; box-sizing: border-box;
         }
-
-        #intro-page.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .intro-title {
-            font-size: 4rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 10px;
-            margin: 0;
-            font-weight: 900;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-        }
-
-        .intro-subtitle {
-            font-size: 1.5rem;
-            color: #fff;
-            margin: 20px 0 40px;
-            letter-spacing: 2px;
+        #intro-page.hidden { opacity: 0; visibility: hidden; }
+        
+        .intro-title { font-size: 3.5rem; color: var(--gold); text-align: center; margin: 0; letter-spacing: 5px; font-weight: 900; line-height: 1.1; }
+        
+        .intro-description { 
+            max-width: 800px; color: #ccc; margin: 30px 0; text-align: center; 
+            font-size: 1.1rem; line-height: 1.8; font-style: italic;
+            border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); padding: 20px 0;
+            white-space: pre-wrap;
         }
 
         .enter-btn {
-            padding: 15px 50px;
-            background: transparent;
-            color: var(--gold);
-            border: 2px solid var(--gold);
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
+            padding: 15px 60px; background: transparent; color: var(--gold);
+            border: 2px solid var(--gold); font-size: 1.2rem; cursor: pointer; transition: 0.3s; font-weight: bold;
         }
+        .enter-btn:hover { background: var(--gold); color: #000; box-shadow: 0 0 20px var(--gold); }
 
-        .enter-btn:hover {
-            background: var(--gold);
-            color: #000;
-            box-shadow: 0 0 20px var(--gold);
-        }
-
-        /* --- PREVIOUS STYLES (Keep existing CSS here) --- */
-        body { font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif; background-color: var(--dark-bg); color: var(--text-color); margin: 0; padding-bottom: 80px; }
+        /* --- HEADER & NAV --- */
         header { text-align: center; padding: 60px 20px; background: #0a0a0a; border-bottom: 3px solid var(--gold); }
-        .tabs-nav { display: flex; justify-content: center; background: #1a1a1a; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; overflow-x: auto; }
-        .tab-link { padding: 18px 30px; cursor: pointer; border: none; background: none; color: #888; font-size: 1.1rem; font-weight: bold; transition: 0.3s; }
-        .tab-link.active { color: var(--gold); border-bottom: 4px solid var(--gold); background: #222; }
-        .tab-content { display: none; max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        .tab-content.active { display: block; }
+        header h1 { color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin: 0; }
         
-        /* ... (Keep all your existing card, magazine, and video styles) ... */
+        .tabs-nav { display: flex; justify-content: center; background: #1a1a1a; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; overflow-x: auto; }
+        .tab-link { padding: 18px 30px; cursor: pointer; border: none; background: none; color: #888; font-size: 1.1rem; font-weight: bold; transition: 0.3s; white-space: nowrap; }
+        .tab-link.active { color: var(--gold); border-bottom: 4px solid var(--gold); background: #222; }
 
+        /* --- CONTENT LAYOUT --- */
+        .tab-content { display: none; max-width: 1050px; margin: 40px auto; padding: 0 20px; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section-title { color: var(--gold); border-left: 5px solid var(--gold); padding-left: 20px; margin: 60px 0 30px; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Category Spacer */
+        .category-spacer { margin: 80px 0 30px; border-top: 1px dashed #444; position: relative; }
+        .category-spacer span { position: absolute; top: -14px; left: 20px; background: var(--dark-bg); padding: 0 15px; color: #888; font-size: 1rem; font-weight: bold; text-transform: uppercase; }
+
+        /* LIST CARDS (Singers/Producers) */
+        .winner-card { background: var(--card-bg); border-radius: 12px; padding: 30px; border: 1px solid #333; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .winner-header { display: flex; align-items: center; margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+        .winner-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #444; margin-right: 25px; background: #000; }
+        .gold-border { border-color: var(--gold); box-shadow: 0 0 10px rgba(212,175,55,0.3); }
+        .silver-border { border-color: var(--silver); }
+        .bronze-border { border-color: var(--bronze); }
+        .winner-title h3 { margin: 0; font-size: 1.1rem; color: var(--gold); letter-spacing: 1px; }
+        .winner-title h4 { margin: 5px 0 0; font-size: 2rem; color: #fff; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; background: #252525; padding: 20px; border-radius: 8px; font-size: 0.95rem; color: #ddd; }
+        .stat-item b { color: var(--gold); display: block; margin-bottom: 4px; font-size: 0.8rem; text-transform: uppercase; }
+
+        /* MAGAZINE CARDS (Top 10) */
+        .mag-card { background: #1e1e1e; border-radius: 16px; display: flex; border: 1px solid #333; position: relative; overflow: hidden; margin-bottom: 50px; min-height: 350px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .rank-huge { position: absolute; top: -30px; left: 10px; font-size: 11rem; font-weight: 900; color: rgba(255,255,255,0.04); z-index: 1; pointer-events: none; line-height: 1; }
+        .rank-huge.gold-rank { color: rgba(212, 175, 55, 0.12); }
+        
+        .mag-img-container { width: 320px; flex-shrink: 0; z-index: 2; position: relative; }
+        .mag-img { width: 100%; height: 100%; object-fit: cover; border-right: 1px solid #333; }
+        
+        .mag-content { padding: 40px; flex-grow: 1; z-index: 2; display: flex; flex-direction: column; justify-content: center; }
+        .mag-title { font-size: 2.2rem; margin: 0; color: #fff; line-height: 1.2; }
+        .mag-subtitle { font-size: 1.4rem; color: var(--gold); margin: 5px 0 20px 0; font-weight: normal; }
+        
+        .credits-box { display: flex; flex-wrap: wrap; gap: 20px; padding: 15px 0; border-top: 1px dashed #444; border-bottom: 1px dashed #444; font-size: 0.9rem; color: #aaa; margin-bottom: 20px; }
+        .credit-tag span { color: var(--gold); font-weight: bold; margin-right: 6px; }
+        
+        .commentary { font-style: italic; color: #ccc; white-space: pre-wrap; font-size: 1.05rem; line-height: 1.8; font-family: "Georgia", serif; }
+
+        /* SMALL VIDEO BOX */
+        .video-container { width: 100%; max-width: 450px; height: 253px; margin-top: 25px; border-radius: 10px; overflow: hidden; background: #000; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .video-container iframe { width: 100%; height: 100%; border: none; }
+
+        @media (max-width: 850px) {
+            .mag-card { flex-direction: column; }
+            .mag-img-container { width: 100%; height: 300px; }
+            .mag-img { border-right: none; border-bottom: 1px solid #333; }
+            .rank-huge { font-size: 7rem; top: 220px; left: 10px; }
+            .intro-title { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
 
 <div id="intro-page">
     <h1 class="intro-title">MADDOG CHART<br>AWARD 2025</h1>
-    <p class="intro-subtitle">年度樂壇成績單 | 樂評與數據匯總</p>
-    <button class="enter-btn" onclick="enterSite()">進入 ❯</button>
+    
+    <div class="intro-description">
+        「這是一份屬於 2024-2025 年度的廣東歌紀錄。
+        透過數據與樂評，我們重新整理這一年間打動過心靈的旋律。
+        不論是主流的大勢歌手，還是獨立的新鮮聲音，都值得被再次細味。
+        歡迎進入 Maddog Chart 的年度總結。」
+    </div>
+
+    <button class="enter-btn" onclick="enterSite()">ENTER 進入</button>
 </div>
 
 <header>
@@ -99,61 +125,189 @@
 </nav>
 
 <div id="singers-producers" class="tab-content active">
-    <div id="singer-list" class="list-grid"></div>
-    <div id="producer-list" class="list-grid"></div>
+    <div id="singer-list"></div>
+    
+    <div class="category-spacer"><span>Production / 幕後精英</span></div>
+    <div id="producer-list" class="stats-grid" style="background:transparent; padding:0; gap:25px;"></div>
 </div>
 
 <div id="songs" class="tab-content">
-    <div id="special-songs-list" class="list-grid"></div>
-    <div id="top10-songs-list" class="magazine-list"></div>
+    <h2 class="section-title">年度特別獎</h2>
+    <div id="special-songs-list"></div>
+    
+    <div class="category-spacer"><span>Top 10 Songs / 十大金曲</span></div>
+    <div id="top10-songs-list"></div>
 </div>
 
 <div id="albums" class="tab-content">
-    <div id="top10-albums-list" class="magazine-list"></div>
+    <h2 class="section-title">十大專輯</h2>
+    <div id="top10-albums-list"></div>
 </div>
 
 <script>
-    // --- INTRO LOGIC ---
-    function enterSite() {
-        document.getElementById('intro-page').classList.add('hidden');
-        // Optional: Play music here if you want
+    function enterSite() { 
+        document.getElementById('intro-page').classList.add('hidden'); 
+        window.scrollTo(0,0);
     }
 
-    // --- DATA SECTION ---
-    // (Ensure your full awardsData array is here)
-    const awardsData = [ /* ... your data ... */ ];
+    // EMBEDDED DATA FROM EXCEL
+    const awardsData = {
+  "singers": [
+    { "award": "是靚新人獎 金獎", "winner": "Amy Lo", "score": 92.0, "chartSongs": "粉月, Red Flag", "champSongs": "綠縈", "comment": "Amy Lo 係 2025 年 Cantopop 新人之中最具話題性嘅名字之一，亦係少數能夠喺出道年即時建立鮮明聲音辨識度嘅歌手。她嘅聲線空靈、冷靜，帶住清楚嘅個人質感，容易令人聯想到王菲式嘅音樂氣質，但今年嘅作品同時展現出屬於新一代嘅取向，避免停留喺單一參考之中。\n\n今年推出嘅一系列作品，以「顏色」作為命題貫穿，唔止係概念設定，而係實際反映喺曲風選擇、人聲處理同情緒層次之上，顯示她對不同音樂語言具備一定掌握力。當中《綠縈》被視為全年代表作之一，歌曲喺旋律同編曲上保持節制，將焦點集中於人聲質感，成功突顯她最具優勢嘅部分。\n\n整體而言，Amy Lo 喺出道首年已展現出清晰定位同良好可塑性，唔單靠聲線吸引注意，而係透過作品選擇逐步建立屬於自己嘅音樂輪廓，亦因此成為今年新人之中完成度最高、最值得關注嘅一位。", "category": "Newcomer", "rank": "gold" },
+    { "award": "是靚新人獎 銀獎", "winner": "晚安莉莉", "score": 41.0, "chartSongs": "如果花火可不消散, 喜歡與愛的感覺", "champSongs": "/", "comment": "晚安莉莉雖然早於數年前成立，但直到今年推出首支派台作品，才正式完成主流出道，並憑 EP《Goodnight, Lillie》進入榜單視野。樂隊以明確嘅 J-Pop rock 風格作為音樂核心，無論節奏處理、旋律走向以至整體美學，都明顯有別於主流廣東歌路線，令其新人定位相當鮮明。\n\n晚安莉莉風格統一，概念完整，並非單靠曲風新鮮感吸引注意。主音 Sinnie 同時負責作曲及填詞，令整張 EP 在主題、情緒同音樂語言上保持一致，建立起清晰嘅創作輪廓。配合樂隊原有嘅聽眾基礎，以及市場對此類風格逐漸提高嘅接受度，晚安莉莉具備條件喺 Cantopop 生態中，開拓一條相對少見而具延續性嘅發展方向。", "category": "Newcomer", "rank": "silver" },
+    { "award": "是靚新人獎 銅獎", "winner": "DAY 許軼", "score": 38.0, "chartSongs": "hold on, Wait a Second", "champSongs": "/", "comment": "DAY 作為 COLLAR 成員，一直被視為最具個人發展潛力之一嘅成員，其個人出道亦累積咗相當程度嘅期待值。她在舞台上具備自然嘅親和力，形象甜美，聲線乾淨，表現方式直接而不造作，正正符合偶像定位所需要嘅吸引力。\n\n今年推出嘅個人作品走向輕快、玩味同偏向少女感嘅風格，整體定位清晰，亦成功將她一貫嘅舞台氣質延伸到音樂之中。雖然音樂層層面仍然以安全取向為主，但在新人階段已展現出穩定嘅表現同明確嘅市場方向，為未來發展奠定基礎。", "category": "Newcomer", "rank": "bronze" },
+    { "award": "是靚樂隊/組合 金獎", "winner": "Pandora", "score": 200.0, "chartSongs": "年輕小說家, 你不等於你, 聖地", "champSongs": "善良之歌, 花之生命", "comment": "Pandora 喺 2025 年嘅表現展現出極強嘅音樂野心與執行力，憑藉多首高質量作品，成功確立了他們在廣東樂壇一線樂隊的地位。樂隊在編曲上的層次感愈發成熟，無論是熱血奔放的搖滾，還是細膩動人的抒情作品，都能展現出極高的完成度。\n\n主音 Tony 具穿透力的嗓音配合隊員們默契十足的樂器編排，令每一首歌都極具渲染力。今年推出的《善良之歌》及《花之生命》接連奪冠，更是證明了他們在旋律創作與大眾共鳴之間的完美平衡。Pandora 的音樂中帶有一種屬於這個時代的倔強與溫柔，是今年組合類別中實至名歸的金獎得主。", "category": "Group", "rank": "gold" },
+    { "award": "是靚樂隊/組合 銀獎", "winner": "RubberBand", "score": 169.0, "chartSongs": "想寫好的功課, 下一位參賽者", "champSongs": "搲撈HK", "comment": "RubberBand 喺 2025 年依然保持著高品質的創作產出，展現出老牌樂隊的沈穩與人文關懷。作品中對於社會細節的觀察以及對平凡人生的致敬，始終是他們最動人之處。編曲上不落俗套，展現了樂隊多年累積的深厚底蘊。", "category": "Group", "rank": "silver" },
+    { "award": "是靚樂隊/組合 銅獎", "winner": "雷同二友", "score": 101.0, "chartSongs": "心之所向, 有你萬事屋, 其實痛是你的想像", "champSongs": "/", "comment": "雷同二友今年憑藉多首溫暖人心的作品，成功在聽眾心中留下深刻印記。她們擅長將日常瑣碎化作細膩的旋律，聲音的和諧度依舊是其最大的優勢。雖然在奪冠次數上略遜一籌，但作品的耐聽度與情感深度令其穩定獲得銅獎。", "category": "Group", "rank": "bronze" },
+    { "award": "是靚女歌手 金獎", "winner": "雲浩影", "score": 217.0, "chartSongs": "世界多了一個陌生人, 氣流, 也要我們想見", "champSongs": "你在我不遠處", "comment": "雲浩影喺 2025 年展現出令人驚艷的進步，成功從溫柔女聲蛻變為具備強大駕馭力的全方位歌手。她在情感表達上的細膩度與層次感，令每一首派台作品都極具說服力。特別是在演繹具有難度的作品時，她的處理愈發游刃有餘。\n\n《你在我不遠處》展現了她聲音中溫暖而堅定的特質。整體而言，雲浩影今年的作品系列感強，形象定位與音樂風格高度統一，展現出了作為一線女歌手的架子與實力，奪得金獎實至名歸。", "category": "Female", "rank": "gold" },
+    { "award": "是靚女歌手 銀獎", "winner": "moon tang", "score": 200.0, "chartSongs": "/", "champSongs": "二十五圓舞曲, 夜闌人靜, 其實痛是你的想像", "comment": "2025 年對 moon tang 而言是突破的一年。她將獨特的 Lo-fi 氣質融入主流樂壇，創造出了一種慵懶卻不失精緻的音樂氛圍。三首冠軍歌的成績足以證明市場對她個人風格的高度認可。她在音樂上的獨特性，使其成為今年女歌手中不可忽視的力量。", "category": "Female", "rank": "silver" },
+    { "award": "是靚女歌手 銅獎", "winner": "JACE 陳凱詠", "score": 191.0, "chartSongs": "PTSD, SWITCH", "champSongs": "是那麼聲勢浩大, 隔離座的同學", "comment": "JACE 喺 2025 年延續了其多變且前衛的音樂形象。從勁歌熱舞到深情對白，她都能展現出強烈的個人色彩。雖然競爭激烈，但她憑藉出色的舞台魅力與極具現代感的作品，穩守銅獎位置，展現了極強的商業價值與藝術感。", "category": "Female", "rank": "bronze" },
+    { "award": "是靚男歌手 金獎", "winner": "陳柏宇", "score": 259.0, "chartSongs": "不愛無壞, 關於後悔, 有你萬事屋", "champSongs": "我所看見的未來, 漂流木", "comment": "音樂上，Jason 今年不僅保持了高品質的演繹水準，更在作品的主題選擇上展現了更多的人生體悟。無論是探討未來的宏觀視角，還是聚焦當下的情感碎片，他都能以極具感染力的嗓音娓娓道來。兩首冠軍作品以及穩定的上榜率，令他無懸念奪得男歌手金獎。", "category": "Male", "rank": "gold" },
+    { "award": "是靚男歌手 銀獎", "winner": "Jer 柳應廷", "score": 243.0, "chartSongs": "不要活成自己討厭的模樣, 畫靈", "champSongs": "記憶倒行, 大人之後, 重拾手記", "comment": "Jer 柳應廷今年繼續在藝術性與流行性之間尋找平衡。他在「記憶」系列作品中展現的爆發力與情感張力，依然是當前樂壇的頂尖水平。三首冠軍歌的高產與高質量，令他穩坐銀獎，繼續鞏固其在樂壇的獨特地位。", "category": "Male", "rank": "silver" },
+    { "award": "是靚男歌手 銅獎", "winner": "MC 張天賦", "score": 238.0, "chartSongs": "168.5, 東邪", "champSongs": "說謊者, 懷疑人生, 遺容", "comment": "MC 張天賦今年依然保持著極高的熱度，他的聲音辨識度與技巧性在同輩男歌手中首屈一指。雖然上榜歌曲數量略遜於前兩名，但冠軍歌的流傳度極高。他在 R&B 與抒情曲風之間的自如切換，令他穩獲銅獎。", "category": "Male", "rank": "bronze" }
+  ],
+  "songs": [
+    { "rankNum": 1, "winner": "用背脊唱情歌", "singer": "湯令山", "comp": "湯令山", "lyr": "黃偉文", "arr": "湯令山, Patrick Yip", "prod": "湯令山, Patrick Yip", "yt_id": "falq0Gr3rc0", "comment": "《用背脊唱情歌》幾乎預定了年度至尊歌的位置。湯令山將個人風格與大眾審美做了完美的融合，慵懶的唱腔配上黃偉文精準的歌詞，唱出了現代人對情感的另一種解讀。" },
+    { "rankNum": 2, "winner": "善良之歌", "singer": "Pandora", "comp": "Pandora", "lyr": "林夕", "arr": "Pandora", "prod": "Pandora, 舒文", "yt_id": "jRs3yCIbyKg", "comment": "《善良之歌》是 Pandora 在 2025 年的集大成之作。林夕的詞為歌曲注入了靈魂，而 Pandora 澎湃的編曲則將這股力量徹底釋放。這是一首在沈重時代中給予人力量的佳作。" },
+    { "rankNum": 3, "winner": "50/50", "singer": "謝安琪", "comp": "林家謙", "lyr": "方皓玟", "arr": "林家謙", "prod": "林家謙", "yt_id": "1BNXyZjym7w", "comment": "謝安琪、林家謙與方皓玟的夢幻聯動。歌曲充滿了精緻的聽感，謝安琪溫柔而帶點疏離感的演繹，完美契合了林家謙靈動的編曲。50/50 是一種平衡，也是一種美學。" },
+    { "rankNum": 4, "winner": "夜闌人靜", "singer": "moon tang", "comp": "Gordon Flanders", "lyr": "小克", "arr": "Gordon Flanders", "prod": "moon tang, Gordon Flanders", "yt_id": "v3rDVWZd72c", "comment": "深夜聽這首歌會有一種被包裹的感覺。Gordon Flanders 的曲風與 moon tang 的嗓音天生一對，將都市人的寂寞演繹得極其高級。" },
+    { "rankNum": 5, "winner": "記憶倒行", "singer": "Jer 柳應廷", "comp": "Supper Moment", "lyr": "Supper Moment", "arr": "青山大樂隊", "prod": "王雙駿", "yt_id": "9C05xxTgvk0", "comment": "大氣磅礴的製作，Jer 柳應廷再次展示了他的聲音掌控力。歌曲在起伏之間帶動聽眾進入記憶的深處，完成度極高。" },
+    { "rankNum": 6, "winner": "說謊者", "singer": "MC 張天賦", "comp": "陳可為", "lyr": "王澄晞", "arr": "徐浩", "prod": "徐浩", "yt_id": "07rwyBuh2Mg", "comment": "MC 擅長的抒情風格，但他演繹得不再只是流於表面的悲傷。徐浩的製作保證了歌曲的流流行度與質感。" },
+    { "rankNum": 7, "winner": "綠縈", "singer": "Amy Lo", "comp": "蘇珮卿 Paige Su", "lyr": "Oscar", "arr": "Perry Lau", "prod": "Perry Lau", "yt_id": "lsfn8FpYDQ8", "comment": "今年最具氣質的新人作品。Amy Lo 空靈的嗓音與充滿空間感的編曲相輔相成，為廣東歌帶來了少見的冷艷色彩。" },
+    { "rankNum": 8, "winner": "無糖可樂", "singer": "泳兒", "comp": "Lil' Ashes", "lyr": "黃偉文", "arr": "蘇道哲", "prod": "蘇道哲", "yt_id": "bgLyJpjWTvY", "comment": "泳兒與蘇道哲的組合再次帶來驚喜。歌曲在冷靜與熱烈之間切換，將現代愛情的虛無感表現得淋漓盡致。" },
+    { "rankNum": 9, "winner": "無題時想起的人", "singer": "林奕匡", "comp": "林奕匡、Harry Kwan", "lyr": "林寶", "arr": "Ariel Lai", "prod": "Edward Chan", "yt_id": "2e8KF4fvzlM", "comment": "林奕匡回歸最純粹的鋼琴與管弦樂編排，林寶的詞細膩動人。這是一首越聽越有味道的作品，展現了唱作人的深厚功底。" },
+    { "rankNum": 10, "winner": "我看見今晚的月色很美，你呢？", "singer": "晚安莉莉", "comp": "Chick Chan, Sinnie Ng", "lyr": "Sinnie Ng", "arr": "晚安莉莉", "prod": "Goro Wong", "yt_id": "q70X4QvSZ9M", "comment": "J-Pop 風格在廣東歌中的成功嘗試。晚安莉莉將那種青澀而直白的愛意，透過充滿律動感的節奏傳遞給聽眾。" }
+  ],
+  "albums": [
+    { "rankNum": 1, "winner": "Writer’s Block", "singer": "AGA 江海迦", "comment": "AGA 醞釀多時的力作。專輯概念完整，音樂風格統一且極具個人特色。她在 R&B 基礎上進行了更多層次的探索，展現了作為頂尖唱作人的實力。" },
+    { "rankNum": 2, "winner": "BLOOM", "singer": "Pandora", "comment": "Pandora 的成長與綻放。專輯收錄了多首高品質派台歌，曲序編排流暢，展現了樂隊在搖滾世界中的多樣性。" },
+    { "rankNum": 3, "winner": "ngo⁵", "singer": "The Hertz", "comment": "《ngo⁵》以「我是誰」作為核心問題，將個人身份、社會規範、原生家庭同時代焦慮交織成一張高度貼近現實嘅專輯。作品唔止講自我，而係將自我放入社會之中，呈現一場持續進行嘅拉扯。\n\n音樂上，The Hertz 以 funk 同 rock 作為主軸，節奏感強，推進力十足，為內在掙扎提供反彈力量。歌曲唔提供答案，但迫使人面對問題，並在混亂之中重新站穩。" },
+    { "rankNum": 4, "winner": "Belonging", "singer": "陳明憙", "comment": "以聲音作為療癒媒介，探索「擁抱情緒」嘅可能性。陳明憙喺《Belonging》示範咗 pop 如何吸納較非主流嘅聲音概念，而不失歌曲本身嘅完整性。" },
+    { "rankNum": 5, "winner": "25", "singer": "moon tang", "comment": "moon tang 的 25 歲宣言。專輯風格多變，卻又能處處體現她標誌性的慵懶與古靈精怪。" },
+    { "rankNum": 6, "winner": "REVOLVING: UP", "singer": "JACE 陳凱詠", "comment": "充滿動感與色彩的專輯。JACE 在專輯中展現了極強的掌控力，每一首歌都充滿了生命力與視覺衝擊力。" },
+    { "rankNum": 7, "winner": "Evergreen", "singer": "林家謙", "comment": "林家謙的四季完結篇。專輯一如既往地精緻，每一首作品都像是精心打磨的工藝品。" },
+    { "rankNum": 8, "winner": "a kiridiculous distance", "singer": "Kiri T", "comment": "Kiri T 的個人特色在專輯中得到淋漓盡致的發揮。編曲現代感極強，展現了獨特的都市美學。" },
+    { "rankNum": 9, "winner": "Kintsugi", "singer": "Jer 柳應廷", "comment": "以金繼為名，探討破碎與重生。專輯情感張力極大，展現了 Jer 柳應廷在音樂藝術上的深度探索。" },
+    { "rankNum": 10, "winner": "時間感【遲】", "singer": "陳健安", "comment": "陳健安對時間與人生的深刻思考。專輯氛圍沈靜，演繹細膩，是一張值得安靜細品的佳作。" }
+  ],
+  "producers": [
+    { "award": "是靚作曲人", "winner": "林家謙", "chartSongs": "春日部, 我們都（可以）是天使", "score": 348.0 },
+    { "award": "是靚填詞人", "winner": "黃偉文", "chartSongs": "計劃書, 泥菩薩, 用背脊唱情歌", "score": 1135.0 },
+    { "award": "是靚編曲人", "winner": "黃兆銘", "chartSongs": "計劃書, 其實痛是你的想像", "score": 416.0 },
+    { "award": "是靚監製", "winner": "陳考威", "chartSongs": "小人國, 想找到對的人", "score": 368.0 }
+  ],
+  "specials": [
+    { "award": "是靚MV", "winner": "冬季限定", "singer": "林家謙", "yt_id": "2aMDpiBI-Ls", "comment": "《冬季限定》作為林家謙嘅年末作品，同時亦完成咗「四季」主題嘅最後一章，為專輯《Evergreen》帶嚟一個情感上相當完整嘅收結。歌曲本身以內斂而克制嘅方式推進情緒，並唔刻意渲染悲傷，卻能夠自然地引導聽眾走入一段屬於自己嘅回望時刻。\n\nMV 以全動畫形式呈現，將情感抽離於具體人物之外，反而拉近咗作品同觀眾之間嘅距離。畫面節奏緊貼歌曲帶有「冬季低潮感」嘅音樂流向，令聽眾更容易將自身經歷投射其中。" },
+    { "award": "是靚合唱歌", "winner": "唯獨我是不可取替", "singer": "R.O.O.T / Jaime 張天穎", "yt_id": "18zffTOr2X4", "comment": "《唯獨我是不可取替》屬於一首以聲線配搭為主導嘅合作作品，亦係近一年 Cantopop 合唱歌之中，少數真正做到「各自保留特色，同時形成整體」嘅例子。" }
+  ]
+};
 
-    // --- RENDER LOGIC (Use the optimized version provided in the previous turn) ---
-    // Make sure to use the 'fullHtml' string builder method to prevent flashing.
+    // --- RENDERING FUNCTIONS ---
 
-    function renderAll() {
-        renderSingers();
-        renderProducers();
-        renderTop10Songs();
-        renderSpecialSongs();
-        renderAlbums();
+    function renderSingers() {
+        const container = document.getElementById('singer-list');
+        let lastCat = "";
+        let html = "";
+        awardsData.singers.forEach(item => {
+            if (item.category !== lastCat) {
+                let catName = item.category === "Newcomer" ? "Newcomer / 新人" : 
+                              item.category === "Group" ? "Band & Group / 樂隊組合" :
+                              item.category === "Female" ? "Female Singer / 女歌手" : "Male Singer / 男歌手";
+                html += `<div class="category-spacer"><span>${catName}</span></div>`;
+                lastCat = item.category;
+            }
+            html += `
+                <div class="winner-card">
+                    <div class="winner-header">
+                        <img src="images/${item.winner}.jpg" class="winner-avatar ${item.rank}-border" onerror="this.src='https://via.placeholder.com/150?text=${item.winner}'">
+                        <div class="winner-title"><h3>${item.award}</h3><h4>${item.winner}</h4></div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item"><b>總分</b>${item.score}</div>
+                        <div class="stat-item"><b>上榜歌</b>${item.chartSongs}</div>
+                        <div class="stat-item"><b>冠軍歌</b>${item.champSongs}</div>
+                    </div>
+                    <p class="commentary">${item.comment}</p>
+                </div>`;
+        });
+        container.innerHTML = html;
     }
 
-    // Initialize all renders
-    renderAll();
+    function renderProducers() {
+        const container = document.getElementById('producer-list');
+        container.innerHTML = awardsData.producers.map(item => `
+            <div class="winner-card" style="margin-bottom:0;">
+                <div class="winner-header" style="margin-bottom:15px; border:none; padding-bottom:0;">
+                    <img src="images/${item.winner}.jpg" class="winner-avatar gold-border" style="width:70px; height:70px;" onerror="this.src='https://via.placeholder.com/150'">
+                    <div class="winner-title"><h3 style="font-size:0.9rem;">${item.award}</h3><h4 style="font-size:1.4rem;">${item.winner}</h4></div>
+                </div>
+                <div class="stat-item"><b>代表作品</b>${item.chartSongs}</div>
+                <div class="stat-item" style="margin-top:10px;"><b>年度得分</b>${item.score}</div>
+            </div>`).join('');
+    }
 
-    // Standard Tab Switcher
+    function renderSongs() {
+        const specialContainer = document.getElementById('special-songs-list');
+        specialContainer.innerHTML = awardsData.specials.map(item => `
+            <div class="winner-card">
+                <div class="winner-header">
+                    <div class="winner-title"><h3>${item.award}</h3><h4>${item.winner} - ${item.singer}</h4></div>
+                </div>
+                <p class="commentary">${item.comment}</p>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/${item.yt_id}"></iframe></div>
+            </div>`).join('');
+
+        const songContainer = document.getElementById('top10-songs-list');
+        songContainer.innerHTML = awardsData.songs.map(item => `
+            <div class="mag-card">
+                <div class="rank-huge ${item.rankNum==1?'gold-rank':''}">${item.rankNum}</div>
+                <div class="mag-img-container"><img src="images/${item.winner}.jpg" class="mag-img" onerror="this.src='https://via.placeholder.com/320?text=${item.winner}'"></div>
+                <div class="mag-content">
+                    <h2 class="mag-title">${item.winner}</h2>
+                    <h3 class="mag-subtitle">${item.singer}</h3>
+                    <div class="credits-box">
+                        <div class="credit-tag"><span>曲</span>${item.comp}</div>
+                        <div class="credit-tag"><span>詞</span>${item.lyr}</div>
+                        <div class="credit-tag"><span>編</span>${item.arr}</div>
+                        <div class="credit-tag"><span>監</span>${item.prod}</div>
+                    </div>
+                    <p class="commentary">${item.comment}</p>
+                    <div class="video-container"><iframe src="https://www.youtube.com/embed/${item.yt_id}"></iframe></div>
+                </div>
+            </div>`).join('');
+    }
+
+    function renderAlbums() {
+        const container = document.getElementById('top10-albums-list');
+        container.innerHTML = awardsData.albums.map(item => `
+            <div class="mag-card">
+                <div class="rank-huge ${item.rankNum==1?'gold-rank':''}">${item.rankNum}</div>
+                <div class="mag-img-container"><img src="images/${item.winner}.jpg" class="mag-img" onerror="this.src='https://via.placeholder.com/320?text=${item.winner}'"></div>
+                <div class="mag-content">
+                    <h2 class="mag-title">${item.winner}</h2>
+                    <h3 class="mag-subtitle">${item.singer}</h3>
+                    <p class="commentary">${item.comment}</p>
+                </div>
+            </div>`).join('');
+    }
+
     function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
+        let i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-            tabcontent[i].classList.remove("active");
-        }
+        for (i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
         tablinks = document.getElementsByClassName("tab-link");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].classList.remove("active");
-        }
+        for (i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
         document.getElementById(tabName).style.display = "block";
-        document.getElementById(tabName).classList.add("active");
         evt.currentTarget.classList.add("active");
+        window.scrollTo(0,0);
     }
-</script>
 
+    // Initialize all sections
+    renderSingers();
+    renderProducers();
+    renderSongs();
+    renderAlbums();
+
+</script>
 </body>
 </html>
