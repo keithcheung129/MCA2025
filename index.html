@@ -115,7 +115,24 @@
 <div id="songs" class="tab-content"><div id="special-songs"></div><div id="song-list"></div></div>
 <div id="albums" class="tab-content"><div id="album-list"></div></div>
 
+
+
+    
 <script>
+    const imageOverrides = {
+        "50/50": "5050.jpg", // Replace slash with underscore for filename
+        "REVOLVING: UP": "REVOLVING UP.jpg", // Replace colon
+        "Winner/Name": "winner_name.jpg"     // Add as many as you need
+    };
+
+    function getImagePath(winnerName) {
+        // Check if we have a manual fix first
+        if (imageOverrides[winnerName]) {
+            return `images/${imageOverrides[winnerName]}`;
+        }
+        // Otherwise, default to the winner name
+        return `images/${winnerName}.jpg`;
+    }
     function enterSite() { document.getElementById('intro-page').classList.add('hidden'); window.scrollTo(0,0); }
 
     // THE DATA (Slightly truncated for display, ensure your Excel data is mapped here)
