@@ -46,11 +46,52 @@
         }
 
         /* --- MAGAZINE CARDS (SQUARE) --- */
+        /* --- Modern Full-Box Watermark Rank --- */
         .mag-card { 
-            background: #1e1e1e; border-radius: 12px; display: flex; 
-            border: 1px solid #333; position: relative; overflow: hidden; margin-bottom: 60px;
+            background: #1e1e1e; 
+            border-radius: 12px; 
+            display: flex; 
+            border: 1px solid #333; 
+            position: relative; /* Essential for absolute positioning of rank */
+            overflow: hidden; 
+            margin-bottom: 60px;
+            min-height: 350px;
         }
 
+        .rank-badge {
+            position: absolute;
+            bottom: -20px; /* Pulls it slightly off-edge for a cool look */
+            left: -10px;
+            font-size: 12rem; /* Massive size */
+            font-weight: 900;
+            line-height: 0.8;
+            z-index: 1; /* Sits behind the text but above the background */
+            color: rgba(255, 255, 255, 0.03); /* Extremely faint white/grey */
+            -webkit-text-stroke: 1px rgba(212, 175, 55, 0.2); /* Thin gold outline */
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            pointer-events: none;
+            letter-spacing: -8px;
+            user-select: none;
+        }
+
+        /* Ensure the text content sits ABOVE the large number */
+        .mag-content { 
+            padding: 40px; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            position: relative; 
+            z-index: 2; /* Keeps text readable over the watermark */
+        }
+    
+        .mag-img-container { 
+            width: 350px; 
+            height: 350px; 
+            flex-shrink: 0; 
+            position: relative; 
+            z-index: 2; /* Keeps image above the watermark */
+        }
         .mag-img { width: 100%; height: 100%; object-fit: cover; display: block; }
         
         /* --- Modern Bottom-Left Rank Style --- */
@@ -63,21 +104,6 @@
             position: relative;
             /* Removed overflow:hidden from parent to allow cool overlaps if desired, 
                but kept for clean square look */
-        }
-
-        .rank-badge {
-            position: absolute;
-            bottom: -10px; /* Slight offset for "cool" factor */
-            left: 10px;
-            font-size: 8rem; /* Very large number */
-            font-weight: 900;
-            line-height: 1;
-            z-index: 5;
-            color: rgba(212, 175, 55, 0.3); /* Transparent Gold */
-            -webkit-text-stroke: 2px var(--gold); /* Gold Outline */
-            font-family: 'Arial Black', sans-serif;
-            pointer-events: none; /* User can click through it */
-            letter-spacing: -5px;
         }
 
         /* Adds a subtle glow to the image container to highlight the rank */
@@ -218,15 +244,17 @@
         // In renderSongs and renderAlbums, update the template to this:
         container.innerHTML = sorted.map(s => `
             <div class="mag-card">
+                <div class="rank-badge">${s.rank}</div>
+        
                 <div class="mag-img-container">
-                    <div class="rank-badge">${s.rank}</div>
                     <img src="${getImagePath(s.winner)}" class="mag-img" onerror="this.src='https://via.placeholder.com/400?text=Cover+Missing'">
                 </div>
+
                 <div class="mag-content">
                     <h2 class="mag-title">${s.winner}</h2>
                     <h3 class="mag-subtitle">${s.singer}</h3>
-                    
-                    <div class="credits-box">
+            
+                <div class="credits-box">
                         <div class="credit-tag"><span>曲</span>${s.comp}</div>
                         <div class="credit-tag"><span>詞</span>${s.lyr}</div>
                         <div class="credit-tag"><span>編</span>${s.arr}</div>
@@ -246,15 +274,17 @@
         // In renderSongs and renderAlbums, update the template to this:
         container.innerHTML = sorted.map(s => `
             <div class="mag-card">
+                <div class="rank-badge">${s.rank}</div>
+        
                 <div class="mag-img-container">
-                    <div class="rank-badge">${s.rank}</div>
                     <img src="${getImagePath(s.winner)}" class="mag-img" onerror="this.src='https://via.placeholder.com/400?text=Cover+Missing'">
                 </div>
+
                 <div class="mag-content">
                     <h2 class="mag-title">${s.winner}</h2>
                     <h3 class="mag-subtitle">${s.singer}</h3>
-                    
-                    <div class="credits-box">
+            
+                <div class="credits-box">
                         <div class="credit-tag"><span>曲</span>${s.comp}</div>
                         <div class="credit-tag"><span>詞</span>${s.lyr}</div>
                         <div class="credit-tag"><span>編</span>${s.arr}</div>
