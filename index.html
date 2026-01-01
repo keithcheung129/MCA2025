@@ -208,7 +208,7 @@
             <div class="mag-card">
                 <div class="rank-badge">${s.rank}</div>
                 <div class="mag-img-container">
-                    <img src="images/${s.winner}.jpg" class="mag-img" onerror="this.src='https://via.placeholder.com/400?text=Song+Cover'">
+                    <img src="${getImagePath(item.winner)}" class="mag-img" onerror="this.src='https://via.placeholder.com/400?text=Cover+Missing'">
                 </div>
                 <div class="mag-content">
                     <h2 class="mag-title">${s.winner}</h2>
@@ -232,7 +232,7 @@
             <div class="mag-card">
                 <div class="rank-badge">${a.rank}</div>
                 <div class="mag-img-container">
-                    <img src="images/${a.winner}.jpg" class="mag-img" onerror="this.src='https://via.placeholder.com/400?text=Album+Cover'">
+                    <img src="${getImagePath(item.winner)}" class="mag-img" onerror="this.src='https://via.placeholder.com/400?text=Cover+Missing'">
                 </div>
                 <div class="mag-content">
                     <h2 class="mag-title">${a.winner}</h2>
