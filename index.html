@@ -50,13 +50,40 @@
             background: #1e1e1e; border-radius: 12px; display: flex; 
             border: 1px solid #333; position: relative; overflow: hidden; margin-bottom: 60px;
         }
-        .mag-img-container { width: 350px; height: 350px; flex-shrink: 0; overflow: hidden; background: #000; position: relative; }
+
         .mag-img { width: 100%; height: 100%; object-fit: cover; display: block; }
         
+        /* --- Modern Bottom-Left Rank Style --- */
+        .mag-img-container { 
+            width: 350px; 
+            height: 350px; 
+            flex-shrink: 0; 
+            overflow: hidden;
+            background: #000;
+            position: relative;
+            /* Removed overflow:hidden from parent to allow cool overlaps if desired, 
+               but kept for clean square look */
+        }
+
         .rank-badge {
-            position: absolute; top: 0; left: 0; background: var(--gold); color: #000;
-            font-size: 2.5rem; font-weight: 900; padding: 10px 25px; z-index: 20;
-            border-bottom-right-radius: 12px; box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            position: absolute;
+            bottom: -10px; /* Slight offset for "cool" factor */
+            left: 10px;
+            font-size: 8rem; /* Very large number */
+            font-weight: 900;
+            line-height: 1;
+            z-index: 5;
+            color: rgba(212, 175, 55, 0.3); /* Transparent Gold */
+            -webkit-text-stroke: 2px var(--gold); /* Gold Outline */
+            font-family: 'Arial Black', sans-serif;
+            pointer-events: none; /* User can click through it */
+            letter-spacing: -5px;
+        }
+
+        /* Adds a subtle glow to the image container to highlight the rank */
+        .mag-card:hover .rank-badge {
+            color: rgba(212, 175, 55, 0.6);
+            transition: 0.3s ease;
         }
 
         .mag-content { padding: 40px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
@@ -101,10 +128,13 @@
     <div class="welcome-section">
         <h1 class="welcome-title">MADDOG CHART AWARD 2025</h1>
         <div class="welcome-text">
-「這是一份屬於 2024-2025 年度的廣東歌紀錄。
-透過數據與樂評，我們重新整理這一年間打動過心靈的旋律。
-不論是主流的大勢歌手，還是獨立的新鮮聲音，都值得被再次細味。
-歡迎進入 Maddog Chart 的年度總結。」
+「過去一年，香港嘅廣東歌並唔只係關於旋律同排行榜位置，而係一次又一次回應現實嘅嘗試。無論係對未來嘅不安、對成長嘅懷疑、對善良嘅追問，抑或係對自我身份同內心裂縫嘅凝視，今年嘅作品不約而同觸及同一個核心——身處一個動盪而複雜嘅時代，人應該點樣繼續生活、繼續相信、繼續創作。
+
+呢啲歌並非宏大宣言，而係來自日常嘅低語：二十五歲嘅迷惘、成年之後嘅無力感、對關係嘅遺憾、對世界善意嘅懷疑與堅持。音樂成為一種陪伴，一種提醒，一種喺黑暗之中仍然願意伸手嘅姿態。或許答案從來唔完整，但提問本身，已經係一種抵抗。
+
+今年同時亦標誌住 Maddog Chart 嘅終結。經歷四年、每星期嘅製作與整理，呢個榜單走到一個必須停低嘅時刻。停下來，並非因為唔再熱愛音樂，而係來自一種深層嘅無力感——對於推廣更寬廣音樂品味、為不同聲音爭取空間，編者逐漸感受到個人力量嘅極限。某程度上，呢份無力亦映照住整個 Cantopop 生態所面對嘅困境。
+
+然而，榜單嘅完結並唔代表聆聽嘅終止。音樂仍然存在，歌手同創作人仍然每日喺不同角落努力發聲。即使冇排行榜，即使冇曝光保證，呢啲作品仍然值得被聽見、被珍惜。希望讀到呢一頁嘅你，仍然願意主動尋找新歌，願意為一首觸動你嘅作品停低片刻。因為無論環境如何，創作本身，仍然值得被相信。」
         </div>
         <p style="margin-top: 40px; color: var(--gold); font-weight: bold;">請點擊上方導覽列開始閱讀</p>
     </div>
@@ -119,7 +149,7 @@
     const imageOverrides = {
         "50/50": "5050.jpg",
         "REVOLVING: UP": "REVOLVING UP.jpg",
-        "JACE 陳凱詠": "JACE.jpg"
+        "JACE 陳凱詠": "JACE 陳凱詠.jpg"
     };
 
     function getImagePath(winnerName) {
@@ -185,21 +215,24 @@
     function renderSongs() {
         const container = document.getElementById('song-list');
         const sorted = [...awardsData.songs].sort((a,b) => b.rank - a.rank);
+        // In renderSongs and renderAlbums, update the template to this:
         container.innerHTML = sorted.map(s => `
             <div class="mag-card">
-                <div class="rank-badge">${s.rank}</div>
                 <div class="mag-img-container">
+                    <div class="rank-badge">${s.rank}</div>
                     <img src="${getImagePath(s.winner)}" class="mag-img" onerror="this.src='https://via.placeholder.com/400?text=Cover+Missing'">
                 </div>
                 <div class="mag-content">
                     <h2 class="mag-title">${s.winner}</h2>
                     <h3 class="mag-subtitle">${s.singer}</h3>
+                    
                     <div class="credits-box">
                         <div class="credit-tag"><span>曲</span>${s.comp}</div>
                         <div class="credit-tag"><span>詞</span>${s.lyr}</div>
                         <div class="credit-tag"><span>編</span>${s.arr}</div>
                         <div class="credit-tag"><span>監</span>${s.prod}</div>
                     </div>
+            
                     <p class="commentary">${s.comment}</p>
                     ${s.yt_id ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${s.yt_id}"></iframe></div>` : ''}
                 </div>
@@ -210,16 +243,26 @@
     function renderAlbums() {
         const container = document.getElementById('album-list');
         const sorted = [...awardsData.albums].sort((a,b) => b.rank - a.rank);
-        container.innerHTML = sorted.map(a => `
+        // In renderSongs and renderAlbums, update the template to this:
+        container.innerHTML = sorted.map(s => `
             <div class="mag-card">
-                <div class="rank-badge">${a.rank}</div>
                 <div class="mag-img-container">
-                    <img src="${getImagePath(a.winner)}" class="mag-img" onerror="this.src='https://via.placeholder.com/400?text=Cover+Missing'">
+                    <div class="rank-badge">${s.rank}</div>
+                    <img src="${getImagePath(s.winner)}" class="mag-img" onerror="this.src='https://via.placeholder.com/400?text=Cover+Missing'">
                 </div>
                 <div class="mag-content">
-                    <h2 class="mag-title">${a.winner}</h2>
-                    <h3 class="mag-subtitle">${a.singer}</h3>
-                    <p class="commentary">${a.comment}</p>
+                    <h2 class="mag-title">${s.winner}</h2>
+                    <h3 class="mag-subtitle">${s.singer}</h3>
+                    
+                    <div class="credits-box">
+                        <div class="credit-tag"><span>曲</span>${s.comp}</div>
+                        <div class="credit-tag"><span>詞</span>${s.lyr}</div>
+                        <div class="credit-tag"><span>編</span>${s.arr}</div>
+                        <div class="credit-tag"><span>監</span>${s.prod}</div>
+                    </div>
+            
+                    <p class="commentary">${s.comment}</p>
+                    ${s.yt_id ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${s.yt_id}"></iframe></div>` : ''}
                 </div>
             </div>
         `).join('');
