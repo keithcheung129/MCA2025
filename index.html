@@ -15,6 +15,17 @@
         /* --- HEADER --- */
         header { text-align: center; padding: 60px 20px; background: #0a0a0a; border-bottom: 3px solid var(--gold); }
         header h1 { margin: 0; color: var(--gold); letter-spacing: 2px; }
+        /* Add this to your CSS */
+        .category-header {
+            width: 100%;
+            padding: 20px;
+            margin-top: 50px;
+            border-bottom: 2px solid var(--gold);
+            color: var(--gold);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
 
         /* --- STICKY NAV --- */
         .tabs-nav { display: flex; justify-content: center; background: #1a1a1a; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; }
@@ -186,6 +197,8 @@
                     <div class="credits-box">
                         <div class="credit-tag"><span>曲</span>${s.comp}</div>
                         <div class="credit-tag"><span>詞</span>${s.lyr}</div>
+                        <div class="credit-tag"><span>編</span>${s.arr}</div>
+                        <div class="credit-tag"><span>監</span>${s.prod}</div>
                     </div>
                     <p class="commentary">${s.comment}</p>
                     ${s.yt_id ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${s.yt_id}"></iframe></div>` : ''}
@@ -214,17 +227,50 @@
 
     function renderSingers() {
         const container = document.getElementById('singer-list');
-        container.innerHTML = awardsData.singers.map(s => `
-            <div class="winner-card">
-                <div class="winner-header">
-                    <img src="${getImagePath(s.winner)}" class="winner-avatar ${s.rank}-border" onerror="this.src='https://via.placeholder.com/150'">
-                    <div><h3>${s.award}</h3><h2 style="margin:0;">${s.winner}</h2></div>
+    
+        // Group categories
+        const categories = {
+            "Newcomer": "是靚新人",
+            "Group": "是靚樂隊/組合",
+            "Female": "是靚女歌手",
+            "Male": "是靚男歌手"
+        };
+
+        let html = "";
+
+        // 1. Render Singers by Category
+        Object.keys(categories).forEach(catKey => {
+            html += `<div class="category-header">${categories[catKey]}</div>`;
+            const filtered = awardsData.singers.filter(s => s.category === catKey);
+        
+            html += filtered.map(s => `
+                <div class="winner-card">
+                    <div class="winner-header">
+                        <img src="${getImagePath(s.winner)}" class="winner-avatar ${s.rank}-border" onerror="this.src='https://via.placeholder.com/150'">
+                        <div><h3>${s.award}</h3><h2 style="margin:0;">${s.winner}</h2></div>
+                    </div>
+                    <p class="commentary">${s.comment}</p>
                 </div>
-                <p class="commentary">${s.comment}</p>
+            `).join('');
+        });
+    
+        // 2. Render Producer Awards at the very bottom
+        html += `<div class="category-header">幕後大獎</div>`;
+        html += awardsData.producers.map(p => `
+            <div class="winner-card" style="border-left: 5px solid var(--gold);">
+                <div class="winner-header">
+                    <div>
+                        <h3 style="color: var(--gold);">${p.award}</h3>
+                        <h2 style="margin:0;">${p.winner}</h2>
+                        <p style="margin:5px 0; color: #888;">代表作品: ${p.chartSongs}</p>
+                    </div>
+                </div>
             </div>
         `).join('');
+    
+        container.innerHTML = html;
     }
-
+    
     function openTab(evt, tabName) {
         const tabcontent = document.getElementsByClassName("tab-content");
         for (let i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
